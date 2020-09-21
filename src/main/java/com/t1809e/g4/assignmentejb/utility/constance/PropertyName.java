@@ -1,6 +1,6 @@
 package com.t1809e.g4.assignmentejb.utility.constance;
 
-public interface ColumnName {
+public interface PropertyName {
 
     //User table
     String USER_FIRST_NAME = "first_name";

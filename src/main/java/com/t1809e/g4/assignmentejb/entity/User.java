@@ -1,6 +1,6 @@
 package com.t1809e.g4.assignmentejb.entity;
 
-import com.t1809e.g4.assignmentejb.utility.constance.ColumnName;
+import com.t1809e.g4.assignmentejb.utility.constance.PropertyName;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,27 +17,27 @@ public class User implements Serializable {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(unique = true, length = 50, nullable = false)
     private String id;
-    @Column(name = ColumnName.USER_FIRST_NAME, length = 50, nullable = false)
+    @Column(name = PropertyName.USER_FIRST_NAME, length = 50, nullable = false)
     private String firstName;
-    @Column(name = ColumnName.USER_LAST_NAME, length = 50, nullable = false)
+    @Column(name = PropertyName.USER_LAST_NAME, length = 50, nullable = false)
     private String lastName;
-    @Column(name = ColumnName.USER_BIRTH_DAY,nullable = false)
+    @Column(name = PropertyName.USER_BIRTH_DAY,nullable = false)
     private LocalDate birthDay;
-    @Column(name = ColumnName.USER_GENDER, length = 7, nullable = false)
+    @Column(name = PropertyName.USER_GENDER, length = 7, nullable = false)
     private String gender;
-    @Column(name = ColumnName.USER_CREATED_AT)
+    @Column(name = PropertyName.USER_CREATED_AT)
     private LocalDateTime createdAt;
-    @Column(name = ColumnName.USER_UPDATED_AT)
+    @Column(name = PropertyName.USER_UPDATED_AT)
     private LocalDateTime updatedAt;
-    @Column(unique = true,name = ColumnName.USER_USERNAME, length = 50, nullable = false)
+    @Column(unique = true,name = PropertyName.USER_USERNAME, length = 50, nullable = false)
     private String username;
-    @Column(name = ColumnName.USER_PASSWORD, length = 255, nullable = false)
+    @Column(name = PropertyName.USER_PASSWORD, length = 255, nullable = false)
     private String password;
-    @Column(name = ColumnName.USER_PHONE, length = 15)
+    @Column(name = PropertyName.USER_PHONE, length = 15)
     private String phone;
-    @Column(name = ColumnName.USER_STATUS, length = 15, nullable = false)
+    @Column(name = PropertyName.USER_STATUS, length = 15, nullable = false)
     private String status;
-    @Column(name = ColumnName.USER_ROLE, length = 15, nullable = false)
+    @Column(name = PropertyName.USER_ROLE, length = 15, nullable = false)
     private String role;
     @ManyToOne(optional = false)
     private Department department;

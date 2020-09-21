@@ -1,11 +1,10 @@
 package com.t1809e.g4.assignmentejb.entity;
 
-import com.t1809e.g4.assignmentejb.utility.constance.ColumnName;
+import com.t1809e.g4.assignmentejb.utility.constance.PropertyName;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,13 +16,13 @@ public class Department implements Serializable {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(unique = true)
     private String id;
-    @Column(name = ColumnName.DEPARTMENT_NAME)
+    @Column(name = PropertyName.DEPARTMENT_NAME)
     private String name;
-    @Column(name = ColumnName.DEPARTMENT_CREATED_AT)
+    @Column(name = PropertyName.DEPARTMENT_CREATED_AT)
     private LocalDateTime createdAt;
-    @Column(name = ColumnName.DEPARTMENT_UPDATED_AT)
+    @Column(name = PropertyName.DEPARTMENT_UPDATED_AT)
     private LocalDateTime updatedAt;
-    @Column(name = ColumnName.DEPARTMENT_STATUS)
+    @Column(name = PropertyName.DEPARTMENT_STATUS)
     private String status;
     @OneToMany(cascade = CascadeType.MERGE)
     private List<User> users;
