@@ -20,7 +20,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).forCodeGeneration(Boolean.TRUE).select()
-				.apis(RequestHandlerSelectors.basePackage("com.t1809e.g4.assignmentejb.api")).paths(PathSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.t1809e.g4.assignmentejb.controller")).paths(PathSelectors.any())
 				.build().apiInfo(apiInfo());
 	}
 

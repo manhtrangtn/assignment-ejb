@@ -1,75 +1,45 @@
 package com.t1809e.g4.assignmentejb.controller;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.t1809e.g4.assignmentejb.entity.Department;
 import com.t1809e.g4.assignmentejb.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-
-/**
- *
- * @author oishi
- */
 @RestController
-//@RequestMapping("department")
-public class DepartmentController {
+@RequestMapping("api/v1/department")
+public class DepartmentController{
+
     @Autowired
     private DepartmentService departmentService;
-    
-    //list all Departments
-    @GetMapping("/getall")
-    public List<Department> getAll(){
-        return (List<Department>) departmentService.findAll();
+
+    @RequestMapping(value = "get-department", method = RequestMethod.GET)
+    public ResponseEntity<?> getDepartment(String id) {
+        return ResponseEntity.ok(departmentService.findOne(id));
     }
-    
-    //query by ID
-    @RequestMapping("/{id}")
-    public Department getById(@PathVariable("id") String id){
-    	Department dpt = departmentService.findOne(id);
-        if (dpt == null){
-            System.out.println("Department Not found");
-        }
-        return dpt;
+
+    @RequestMapping(value = "get-departments", method = RequestMethod.GET)
+    public ResponseEntity<?> getDepartments(String keyword) {
+        return ResponseEntity.ok(departmentService.findAll());
     }
-    
-    //add new Department
-    @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Department dpt){
-    	departmentService.save(dpt);
-        return ResponseEntity.ok(null);
+
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public ResponseEntity<?> createDepartment(Department department) {
+        departmentService.save(department);
+        return ResponseEntity.ok("Save success!");
     }
-    
-    //delete Department
-    public void deleteById(@PathVariable String id){
-    	Department dpt= departmentService.findOne(id);
-        if(dpt == null){
-            System.out.println("Department Not found");
-            return;
-        }
+
+    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateDepartment(Department department) {
+        departmentService.save(department);
+        return ResponseEntity.ok("Update success!");
+    }
+
+    @RequestMapping(value = "delete-department", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteDepartment(String id) {
         departmentService.delete(id);
-        System.out.println("deleted successful");
+        return ResponseEntity.ok("Deleted");
     }
-    
-    //update Department
-    @PutMapping("/update")
-    public Department update(@RequestBody Department dpt){
-    	Department updtDpt = departmentService.findOne(dpt.getId());
-        if (updtDpt != null){
-        	departmentService.save(dpt);
-            System.out.println("saved");
-            return dpt;
-        }
-        System.out.println("Department Not found");
-        return updtDpt;
-    }
-    
 }
