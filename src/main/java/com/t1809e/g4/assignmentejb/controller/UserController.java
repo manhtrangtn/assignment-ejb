@@ -53,5 +53,4 @@ public class UserController {
         userService.deleteUserFromDepartment(userId, departmentId);
         return ResponseEntity.ok("Updated successfully!");
     }
-
 }
