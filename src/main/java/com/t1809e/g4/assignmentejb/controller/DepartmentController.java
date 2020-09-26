@@ -4,11 +4,13 @@ import com.t1809e.g4.assignmentejb.entity.Department;
 import com.t1809e.g4.assignmentejb.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/department")
 public class DepartmentController{
 
