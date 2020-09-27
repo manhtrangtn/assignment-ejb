@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/user")
@@ -26,13 +28,14 @@ public class UserController {
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     ResponseEntity<?> createUser(@RequestBody User user) {
-
+        user.setCreatedAt(LocalDateTime.now());
         userService.saveUser(user);
         return ResponseEntity.ok("Created successfully!");
     }
 
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     ResponseEntity<?> updateUser(@RequestBody User user) {
+        user.setUpdatedAt(LocalDateTime.now());
         userService.saveUser(user);
         return ResponseEntity.ok("Updated successfully!");
     }

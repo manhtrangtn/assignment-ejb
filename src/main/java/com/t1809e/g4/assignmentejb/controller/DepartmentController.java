@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/department")
@@ -26,12 +28,14 @@ public class DepartmentController{
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ResponseEntity<?> createDepartment(@RequestBody Department department) {
+        department.setCreatedAt(LocalDateTime.now());
         departmentService.save(department);
         return ResponseEntity.ok("Save success!");
     }
 
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDepartment(@RequestBody Department department) {
+        department.setUpdatedAt(LocalDateTime.now());
         departmentService.save(department);
         return ResponseEntity.ok("Update success!");
     }
