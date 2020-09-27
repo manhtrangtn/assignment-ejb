@@ -16,6 +16,8 @@ public class DepartmentService {
     private DepartmentRepository departmentRepository;
     
     public Iterable<Department> findAll(String keyword){
+
+        keyword = "%" + keyword + "%";
         return departmentRepository.findAllByNameLike(keyword);
     }
     

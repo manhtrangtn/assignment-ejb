@@ -1,5 +1,6 @@
 package com.t1809e.g4.assignmentejb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.t1809e.g4.assignmentejb.utility.constance.PropertyName;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -39,6 +40,7 @@ public class User implements Serializable {
     private String status;
     @Column(name = PropertyName.USER_ROLE, length = 15, nullable = false)
     private String role;
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Department department;
 

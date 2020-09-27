@@ -1,5 +1,6 @@
 package com.t1809e.g4.assignmentejb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.t1809e.g4.assignmentejb.utility.constance.PropertyName;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,6 +25,7 @@ public class Department implements Serializable {
     private LocalDateTime updatedAt;
     @Column(name = PropertyName.DEPARTMENT_STATUS)
     private String status;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.MERGE)
     private List<User> users;
 
