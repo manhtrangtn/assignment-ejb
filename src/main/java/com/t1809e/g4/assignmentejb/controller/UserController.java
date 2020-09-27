@@ -21,7 +21,7 @@ public class UserController {
 
     @RequestMapping(value = "get-users", method = RequestMethod.GET)
     ResponseEntity<?> getUsers(@RequestParam String keyword) {
-        return ResponseEntity.ok(userService.getUsers());
+        return ResponseEntity.ok(userService.getUsers(keyword));
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)

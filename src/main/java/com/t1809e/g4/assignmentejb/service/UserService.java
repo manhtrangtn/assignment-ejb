@@ -22,8 +22,8 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public List<User> getUsers(){
-        return userRepository.findAll();
+    public List<User> getUsers(String keyword){
+        return userRepository.findAllByFirstNameOrLastNameLike(keyword);
     }
 
     public void saveUser(User user){

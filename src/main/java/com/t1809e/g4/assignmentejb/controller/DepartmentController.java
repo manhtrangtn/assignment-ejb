@@ -4,10 +4,7 @@ import com.t1809e.g4.assignmentejb.entity.Department;
 import com.t1809e.g4.assignmentejb.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -18,29 +15,29 @@ public class DepartmentController{
     private DepartmentService departmentService;
 
     @RequestMapping(value = "get-department", method = RequestMethod.GET)
-    public ResponseEntity<?> getDepartment(String id) {
+    public ResponseEntity<?> getDepartment(@RequestParam String id) {
         return ResponseEntity.ok(departmentService.findOne(id));
     }
 
     @RequestMapping(value = "get-departments", method = RequestMethod.GET)
-    public ResponseEntity<?> getDepartments(String keyword) {
-        return ResponseEntity.ok(departmentService.findAll());
+    public ResponseEntity<?> getDepartments(@RequestParam String keyword) {
+        return ResponseEntity.ok(departmentService.findAll(keyword));
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public ResponseEntity<?> createDepartment(Department department) {
+    public ResponseEntity<?> createDepartment(@RequestBody Department department) {
         departmentService.save(department);
         return ResponseEntity.ok("Save success!");
     }
 
     @RequestMapping(value = "update", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateDepartment(Department department) {
+    public ResponseEntity<?> updateDepartment(@RequestBody Department department) {
         departmentService.save(department);
         return ResponseEntity.ok("Update success!");
     }
 
     @RequestMapping(value = "delete-department", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteDepartment(String id) {
+    public ResponseEntity<?> deleteDepartment(@RequestParam String id) {
         departmentService.delete(id);
         return ResponseEntity.ok("Deleted");
     }

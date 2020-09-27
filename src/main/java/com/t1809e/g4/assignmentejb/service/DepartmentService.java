@@ -15,8 +15,8 @@ public class DepartmentService {
 	@Autowired
     private DepartmentRepository departmentRepository;
     
-    public Iterable<Department> findAll(){
-        return departmentRepository.findAll();
+    public Iterable<Department> findAll(String keyword){
+        return departmentRepository.findAllByNameLike(keyword);
     }
     
     public Department findOne(String id){
