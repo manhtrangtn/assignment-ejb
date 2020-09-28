@@ -42,7 +42,7 @@ public class User implements Serializable {
     @Column(name = PropertyName.USER_ROLE, length = 15, nullable = true)
     private String role;
     @JsonIgnore
-    @JoinColumn(insertable = false, updatable = false)
+    @JoinColumn( referencedColumnName = "id",insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Department department;
 
