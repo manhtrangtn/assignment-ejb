@@ -26,7 +26,7 @@ public class Department implements Serializable {
     @Column(name = PropertyName.DEPARTMENT_STATUS)
     private String status;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "department")
     private List<User> users;
 
     public Department() {

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "uzer")
 public class User implements Serializable {
 
     @Id
@@ -41,6 +42,7 @@ public class User implements Serializable {
     @Column(name = PropertyName.USER_ROLE, length = 15, nullable = false)
     private String role;
     @JsonIgnore
+    @JoinColumn(insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Department department;
 
