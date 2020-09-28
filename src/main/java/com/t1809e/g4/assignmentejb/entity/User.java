@@ -39,7 +39,7 @@ public class User implements Serializable {
     private String phone;
     @Column(name = PropertyName.USER_STATUS, length = 15, nullable = false)
     private String status;
-    @Column(name = PropertyName.USER_ROLE, length = 15, nullable = false)
+    @Column(name = PropertyName.USER_ROLE, length = 15, nullable = true)
     private String role;
     @JsonIgnore
     @JoinColumn(insertable = false, updatable = false)
