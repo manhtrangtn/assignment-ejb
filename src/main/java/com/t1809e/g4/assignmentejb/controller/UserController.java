@@ -31,16 +31,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    ResponseEntity<?> createUser(@RequestBody User user) {
+    ResponseEntity<?> createUser(@RequestBody User user, @RequestParam String departmentId) {
         user.setCreatedAt(LocalDateTime.now());
-        userService.saveUser(user);
+        userService.saveUser(user, departmentId);
         return ResponseEntity.ok("Created successfully!");
     }
 
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     ResponseEntity<?> updateUser(@RequestBody User user) {
         user.setUpdatedAt(LocalDateTime.now());
-        userService.saveUser(user);
+        userService.updateUser(user);
         return ResponseEntity.ok("Updated successfully!");
     }
 

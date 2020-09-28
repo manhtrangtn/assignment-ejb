@@ -27,7 +27,14 @@ public class UserService {
         return userRepository.fullTextSearchh(keyword);
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user , String departmentId){
+        Department department = departmentRepository.findById(departmentId).get();
+        user.setDepartment(department);
+
+        userRepository.save(user);
+    }
+
+    public void updateUser(User user){
         userRepository.save(user);
     }
 
