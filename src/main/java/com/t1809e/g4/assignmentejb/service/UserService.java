@@ -23,8 +23,8 @@ public class UserService {
     }
 
     public List<User> getUsers(String keyword){
-        keyword = "%" + keyword + "%";
-        return userRepository.findAllByFirstNameOrLastNameLike(keyword);
+//        keyword = "%" + keyword + "%";
+        return userRepository.findAllByFirstNameAndLastNameLike(keyword, keyword);
     }
 
     public void saveUser(User user){

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Component
-public interface UserRepository extends MongoRepository<User, String> {
-    @Query("select u from User u where u.firstName like :keyword or u.lastName like :keyword")
-    List<User> findAllByFirstNameOrLastNameLike(@Param("keyword") String keyword);
+public interface UserRepository extends JpaRepository<User, String> {
+//    @Query("select u from User u where u.firstName like :keyword or u.lastName like :keyword")
+    List<User> findAllByFirstNameAndLastNameLike(String keyword, String keyword2);
 }

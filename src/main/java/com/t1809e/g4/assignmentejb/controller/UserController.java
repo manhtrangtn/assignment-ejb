@@ -4,6 +4,8 @@ import com.t1809e.g4.assignmentejb.entity.User;
 import com.t1809e.g4.assignmentejb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/user")
+@Component
 public class UserController {
 
     @Autowired
@@ -23,6 +26,7 @@ public class UserController {
 
     @RequestMapping(value = "get-users", method = RequestMethod.GET)
     ResponseEntity<?> getUsers(@RequestParam String keyword) {
+        keyword = ObjectUtils.isEmpty(keyword)? "":keyword;
         return ResponseEntity.ok(userService.getUsers(keyword));
     }
 
