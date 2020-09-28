@@ -6,6 +6,7 @@ import com.t1809e.g4.assignmentejb.repository.DepartmentRepository;
 import com.t1809e.g4.assignmentejb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class UserService {
     private DepartmentRepository departmentRepository;
 
     public User getUser(String id){
-        return userRepository.findById(id).get();
+        return userRepository.getUserById(id);
     }
 
     public List<User> getUsers(String keyword){
@@ -28,6 +29,7 @@ public class UserService {
     }
 
     public void saveUser(User user , String departmentId){
+        departmentId = ObjectUtils.isEmpty(departmentId)? "":departmentId;
         Department department = departmentRepository.findById(departmentId).get();
         user.setDepartment(department);
 

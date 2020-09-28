@@ -15,4 +15,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, String> {
     @Query("select u from User u where u.firstName like :keyword or u.lastName like :keyword")
     List<User> fullTextSearchh(String keyword);
+
+    User getUserById(String id);
 }
