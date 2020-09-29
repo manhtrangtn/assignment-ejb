@@ -62,10 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and().exceptionHandling().accessDeniedPage("/view/notAuth");
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
