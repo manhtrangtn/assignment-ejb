@@ -30,12 +30,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtProvider tokenProvider;
-
     @RequestMapping(value = "get-user", method = RequestMethod.GET)
     ResponseEntity<?> getUser(@RequestParam String id) {
         return ResponseEntity.ok(userService.getUser(id));
@@ -79,24 +73,6 @@ public class UserController {
         return ResponseEntity.ok("Updated successfully!");
     }
 
-    @PostMapping("/auth")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthenticateRequest loginRequest) {
 
-        // Xác thực từ username và password.
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
-                )
-        );
-
-        // Nếu không xảy ra exception tức là thông tin hợp lệ
-        // Set thông tin authentication vào Security Context
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // Trả về jwt cho người dùng.
-        String jwt = tokenProvider.generateToken((MyUserDetail) authentication.getPrincipal());
-        return new ResponseEntity<AuthenticateResponse>(new AuthenticateResponse(jwt, LocalDate.now()), HttpStatus.ACCEPTED);
-    }
 
 }
