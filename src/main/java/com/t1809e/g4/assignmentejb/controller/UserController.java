@@ -1,13 +1,24 @@
 package com.t1809e.g4.assignmentejb.controller;
 
+import com.t1809e.g4.assignmentejb.configuration.JwtProvider;
+import com.t1809e.g4.assignmentejb.configuration.MyUserDetail;
+import com.t1809e.g4.assignmentejb.dto.AuthenticateRequest;
+import com.t1809e.g4.assignmentejb.dto.AuthenticateResponse;
 import com.t1809e.g4.assignmentejb.entity.User;
 import com.t1809e.g4.assignmentejb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
@@ -18,6 +29,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtProvider tokenProvider;
 
     @RequestMapping(value = "get-user", method = RequestMethod.GET)
     ResponseEntity<?> getUser(@RequestParam String id) {
@@ -61,4 +78,25 @@ public class UserController {
         userService.deleteUserFromDepartment(userId, departmentId);
         return ResponseEntity.ok("Updated successfully!");
     }
+
+    @PostMapping("/auth")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthenticateRequest loginRequest) {
+
+        // Xác thực từ username và password.
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        // Nếu không xảy ra exception tức là thông tin hợp lệ
+        // Set thông tin authentication vào Security Context
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Trả về jwt cho người dùng.
+        String jwt = tokenProvider.generateToken((MyUserDetail) authentication.getPrincipal());
+        return new ResponseEntity<AuthenticateResponse>(new AuthenticateResponse(jwt, LocalDate.now()), HttpStatus.ACCEPTED);
+    }
+
 }

@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     List<User> fullTextSearchh(String keyword);
 
     User getUserById(String id);
+
+    User findByUsername(String username);
 }

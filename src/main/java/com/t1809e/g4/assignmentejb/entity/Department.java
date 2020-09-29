@@ -25,20 +25,16 @@ public class Department implements Serializable {
     private LocalDateTime updatedAt;
     @Column(name = PropertyName.DEPARTMENT_STATUS)
     private String status;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "department")
-    private List<User> users;
 
     public Department() {
     }
 
-    public Department(String id, String name, LocalDateTime createdAt, LocalDateTime updatedAt, String status, List<User> users) {
+    public Department(String id, String name, LocalDateTime createdAt, LocalDateTime updatedAt, String status) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
-        this.users = users;
     }
 
     public String getId() {
@@ -81,11 +77,4 @@ public class Department implements Serializable {
         this.status = status;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-}
+   }

@@ -41,15 +41,13 @@ public class User implements Serializable {
     private String status;
     @Column(name = PropertyName.USER_ROLE, length = 15, nullable = true)
     private String role;
-    @JsonIgnore
-    @JoinColumn( referencedColumnName = "id",insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Department department;
+
+    private String departmentId;
 
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, LocalDate birthDay, String gender, LocalDateTime createdAt, LocalDateTime updatedAt, String username, String password, String phone, String status, String role, Department department) {
+    public User(String id, String firstName, String lastName, LocalDate birthDay, String gender, LocalDateTime createdAt, LocalDateTime updatedAt, String username, String password, String phone, String status, String role, String department) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,7 +60,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.status = status;
         this.role = role;
-        this.department = department;
+        this.departmentId = department;
     }
 
     public String getId() {
@@ -161,11 +159,30 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public Department getDepartment() {
-        return department;
+    public String getDepartment() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment(String department) {
+        this.departmentId = department;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDay=" + birthDay +
+                ", gender='" + gender + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", status='" + status + '\'' +
+                ", role='" + role + '\'' +
+                ", departmentId='" + departmentId + '\'' +
+                '}';
     }
 }

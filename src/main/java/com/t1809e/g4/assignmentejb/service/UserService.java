@@ -29,9 +29,7 @@ public class UserService {
     }
 
     public void saveUser(User user , String departmentId){
-        departmentId = ObjectUtils.isEmpty(departmentId)? "":departmentId;
-        Department department = departmentRepository.findById(departmentId).get();
-        user.setDepartment(department);
+        user.setDepartment(departmentId);
 
         userRepository.save(user);
     }
@@ -46,10 +44,9 @@ public class UserService {
     }
 
     public void addUserToDepartment(String userId, String departmentId){
-        Department department = departmentRepository.findById(departmentId).get();
         User user = userRepository.findById(userId).get();
 
-        user.setDepartment(department);
+        user.setDepartment(departmentId);
         userRepository.save(user);
     }
 
